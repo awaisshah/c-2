@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 	perror("ERROR connecting");
 	exit(1);
     }
+    fgets(buffer, sizeof(buffer), stdin);
     n = write(sockfd,buffer,strlen(buffer));  //Send the hello message to server
     if (n < 0)
     { 
