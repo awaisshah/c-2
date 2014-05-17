@@ -8,9 +8,9 @@
 
 int main()
 {
-     int sockfd, newsockfd, portno;
+     int k=0,sockfd, newsockfd, portno, i=0;
      socklen_t clilen;
-     char buffer[256];
+     unsigned char buffer[256];
      struct sockaddr_in serv_addr, cli_addr;
      int n;
      sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -41,12 +41,33 @@ int main()
     	exit(1);
      }
      bzero(buffer,256);
-     n = read(newsockfd,buffer,255);
+     n = read(newsockfd,buffer,255);	
+     printf("The received string is : %s\n", buffer);
+     for (i=0; buffer[i]!='\0'; i++)
+     {
+	if (buffer[i] == ' ') {
+	  if (buffer[i+2]>=48 && buffer[i+2]<=57) 
+	  {	
+	   k=(buffer[i+1]-48)*10 + (buffer[i+2]-48); 
+	  }
+	  else
+	   k=buffer[i+1]-48;
+	   break;
+	}
+     }
+     printf("Value of k is : %d\n",k);
+     for (i=0;buffer[i]!=' ';i++)
+     {
+	buffer[i] = buffer[i] + k;
+	if (buffer[i]>122)
+	   buffer[i] = buffer[i] - 26;
+     }
+     buffer[i] = '\0';
+     printf("The encrypted string is : %s\n", buffer);
      if (n < 0) { 
          perror("ERROR reading from socket");
          exit(1);
      }
-     printf("Client says: %s\n",buffer);
      n = write(newsockfd,"Got your message",18);
      if (n < 0) {
          perror("ERROR writing to socket");
