@@ -1,24 +1,27 @@
 #include <stdio.h>
 #include <string.h>
 
-void check (char *a, char *b, int (*cmp)(const char*, const char*));
+void copystring (char *a, char *b, char* (*cp)(const char*, const char*));
 
 int main()
 {
-   char s1[10],s2[10];
-   int (*p)();
-   p=strcmp;
-   fgets(s1, sizeof(s1), stdin);
-   fgets(s2, sizeof(s2), stdin);
-   check (s1,s2,p);
-   return 0;
+   char s1[80], s2[80];
+   char* (*p)();
+   
+   p = strcpy;
+   
+   fgets (s1, 100, stdin);
+   copystring(s1,s2, p);
+   printf("%s\n",s2);
 }
 
-void check(char *a, char *b, int (*cmp)(const char*, const char*))
+void copystring(char* a, char *b, char* (*cp)(const char* a, const char* b))
 {
-   printf ("Check for equality \n");
-   if (!(*cmp)(a,b))
-     printf("Equal\n");
-   else
-     printf ("Not equal\n");
+   int i=0;
+   printf("\nRunning the copystring function\n");
+   for (i=0;*(a+i)!='\0';i++) {
+	*(b+i) = *(a+i);   	
+   }	 
+   *(b+i) = '\0';
 }
+ 
