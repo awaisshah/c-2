@@ -3,16 +3,10 @@
 #include <sys/types.h>
 #include <stdlib.h>
 
-int main(int argc, char* argv[]) {
+int main() {
 
 	int n, c, a=0, b=1, i=0;
 	pid_t pid;
-	if (argc == 2)
-		n = atoi (argv[1]);
-	else {
-		printf ("Usage : ./(executable) (no. of terms)\n");
-		exit (1);
-	}
 	pid = fork ();
 	if (pid <0) {
 		fprintf (stderr, "Fork failed\n");	
@@ -34,9 +28,12 @@ int main(int argc, char* argv[]) {
 			b = c;
 			c = a + b;
 		  }
+		  printf("\n");
 		}
 	}
 	else {
-		printf ("\nI am the parent!\n");
+		printf ("\nParent Process!\n");
+		wait (NULL);
+		printf ("Execution of child complete\n");
 	}
 }			 	
