@@ -3,7 +3,7 @@
 struct list {
 	int n;
 	struct list *next;
-} *head, *node;
+} *head, *node, *temp;
 
 void addn();
 void deleten();
@@ -44,9 +44,21 @@ void addn () {
 }
 
 void deleten() {
+	printf ("Element being deleted : %d", head->n);
+	temp = head;
+	head = head->next;
+	free (temp);
 }
 
 void viewn() {
+	int i, pos;
+	node = head;
+	printf ("Enter the position of element to be viewed : ");
+	scanf (" %d", &pos);
+	for (i=0; i<pos-1 && node!=NULL; i++) {
+		node = node->next;
+	}
+	printf ("Value is : %d\n", node->n);
 }
 
 void view () {
