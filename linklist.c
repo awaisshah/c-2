@@ -9,16 +9,18 @@ void addn();
 void deleten();
 void viewn();
 void view();
+void deletenth();
 
 int main() {
 	char c;
 	head = NULL;
-	while (c != 'e') {	
+	while (c != 'f') {	
 		printf ("\na. Add an element\n");
 		printf ("b. Delete an element\n");
 		printf ("c. View nth element\n");
 		printf ("d. View all elements\n");
-		printf ("e. Exit\n");
+		printf ("e. Delete nth element\n");
+		printf ("f. Exit\n");
 		printf ("Enter a choice : ");
 		scanf (" %c", &c);
 		if (c == 'a')
@@ -29,6 +31,8 @@ int main() {
 			viewn();
 		else if (c == 'd')
 			view();
+		else if (c == 'e')
+			deletenth();
 	}
 }
 
@@ -69,4 +73,21 @@ void view () {
 		node = node->next;
 	}
 	printf ("\n");
+}
+
+void deletenth () {
+	int i, pos;
+	printf ("Enter the position of the element to be deleted : ");
+	node = head;
+	scanf (" %d", &pos);
+	for (i=0;i<pos-2; i++) {
+		node = (node->next)->next;
+	}
+	node = head;
+	while (node != NULL) {
+        printf ("%d ", node->n);
+        node = node->next;
+    }
+    printf ("\n");
+	
 }
