@@ -80,8 +80,19 @@ void deletenth () {
 	printf ("Enter the position of the element to be deleted : ");
 	node = head;
 	scanf (" %d", &pos);
-	for (i=0;i<pos-2; i++) {
-		node = (node->next)->next;
+	if (pos == 1) {
+		temp = node;
+		node = node->next;
+		head = node;
+		free (temp);
+	}
+	else {
+		for (i=0;i<pos-2; i++) {
+			node = node->next;
+		}
+		temp = node->next;
+    	node->next = (node->next)->next;
+    	free (temp);
 	}
 	node = head;
 	while (node != NULL) {
