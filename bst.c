@@ -5,61 +5,68 @@ struct bst {
 	int data;
 	struct bst *right;
 	struct bst *left;
-};
+} *root, *node, *temp;
 
+struct bst* newNode (int data);
 struct bst* insert(struct bst *root, int data);
 int search (struct bst *root, int data);
 void delete(int data);
 void view();
 
 int main() {
-	struct bst *root, *node, *temp;
+
 	int flag = 0, data;
 	char c;
 	root = NULL;
 	node = NULL;
 	temp = NULL;
-	printf ("\na. Insert\nb. Delete\nc. Search\nd. View\ne. Exit\n");
+	printf ("\na. Insert\nb. Search\nc. Exit\n");
 	while (1) {
 		printf ("\nEnter a choice : ");
 		scanf (" %c", &c);
 		if (c == 'a') {
 			printf ("Enter data to be added to BST : ");
 			scanf (" %d", &data);
-			if (root == NULL) {
-				root = insert (root, data);
-				printf ("Data : %d\n", root->data);
-			}
-			else {
-				temp = root;
-				node = insert (temp, data);
-				printf ("Temp Data : %d\n", temp->data);
-				printf ("Data : %d\n", node->data);
-			}	
+			root = insert (root, data);
 		}
-		else if (c == 'e')
+		else if (c == 'b') {
+			printf ("Enter the element to be searched for : ");
+			scanf (" %d", &data);
+			flag = search (root, data);
+			if (flag == 1) 
+				printf ("Element found\n");
+			else
+				printf ("Element not found\n");
+			flag = 0;
+		}
+		else if (c == 'c')
 			break;
 	}
-	temp = root;
-	flag = search (temp, 20);
-	printf ("\n\nFlag = %d\n\n", flag);
 	return 0;
 }
 
-struct bst* insert (struct bst *temp, int data) {
-	if (temp == NULL) {
-		temp = malloc (sizeof (struct bst));
-		temp->left = NULL;
-		temp->right = NULL;
-		temp->data = data;
+struct bst* newNode (int data) {
+	struct bst* node = malloc (sizeof (struct bst));
+	node->data = data;
+	node->left = NULL;
+	node->right = NULL;
+	return node;
+}
+
+struct bst* insert (struct bst* root, int data) {
+	if (root == NULL) {
+		root = newNode (data);
+        return root;
 	}
-	else if (data <= temp->data) {
-		insert (temp->left, data);
-	}
-	else if (data > temp->data) {
-		insert (temp->right, data);
-	}
-	return temp;
+    
+    else if (data <= root->data) {
+        root->left = insert (root->left, data);
+    }
+    
+    else {
+        root->right = insert (root->right, data);
+    }
+    return root;
 }
 
 int search (struct bst *root, int data) {
@@ -71,10 +78,6 @@ int search (struct bst *root, int data) {
 		return search (root->left, data);
 	else if (data > root->data)
 		return search (root->right, data);
+	return 0;
 }
 
-void delete (int data) {
-}
-
-void view () {
-}
