@@ -13,6 +13,6 @@ int main() {
 	int n;
 	printf ("Enter an n : ");
 	scanf (" %d", &n);
-	printf ("%dth term is : %d\n", n+1, recur(n));
+	printf ("%dth term is : %d\n", n, recur(n));
 	return 0;
 }
