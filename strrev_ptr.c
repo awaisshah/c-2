@@ -23,4 +23,5 @@ int main() {
 	*(--temp) = '\0';
 	reverse (s, temp-1);
 	printf ("Reversed string is : %s\n", s);
+	return 0;
 }
