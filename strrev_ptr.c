@@ -19,6 +19,7 @@ int main() {
 	while (*temp) {
 		temp++;
 	}
+	/* On my system, the string is getting appended with a \n before null termination */
 	*(--temp) = '\0';
 	reverse (s, temp-1);
 	printf ("Reversed string is : %s\n", s);
