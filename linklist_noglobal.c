@@ -35,6 +35,23 @@ void display (struct linklist **head) {
 	printf ("NULL\n");
 }
 
+
+void reverse (struct linklist **head) {
+	struct linklist *current = *head, *prev = NULL, *next;
+	printf ("Before next\n");
+	next = current->next;
+	printf ("After next\n");
+	while (current!=NULL) {
+		current->next = prev;
+		prev = current;
+		current = next;
+		if (current)
+			next = current->next;
+	}
+	*head = prev;
+
+}
+
 void displayn (int n, struct linklist **head) {
 	int count;
 	struct linklist *node = *head;
@@ -85,7 +102,13 @@ int main() {
 				scanf (" %d", &n);
 				displayn (n,&head);
 				break;
-			
+
+			case 'r':
+				reverse(&head);
+				printf ("Reverseed list is: ");
+				display (&head);
+				break;			
+
 			case 'e':
 				exit(0);
 				break;
