@@ -38,18 +38,14 @@ void display (struct linklist **head) {
 
 void reverse (struct linklist **head) {
 	struct linklist *current = *head, *prev = NULL, *next;
-	printf ("Before next\n");
 	next = current->next;
-	printf ("After next\n");
 	while (current!=NULL) {
+		next = current->next;
 		current->next = prev;
 		prev = current;
 		current = next;
-		if (current)
-			next = current->next;
 	}
 	*head = prev;
-
 }
 
 void displayn (int n, struct linklist **head) {
