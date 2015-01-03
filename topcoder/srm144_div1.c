@@ -24,15 +24,11 @@ void decode(char* q, int f) {
 	int i;
 	p[0] = f+48;
 	p[1] = q[0] - p[0] + 48;
-	if (p[1]<48 || p[1]>57) {
-		strcpy(p, "NONE");
-		return;
-	}
-	
+
 	p[strlen(q)-1] = '\0';
 	for (i=1; i<strlen(q)-2; i++) {
 		p[i+1] = q[i] - p[i-1] - p[i] + 96;
-		if (p[i+1]<48 || p[i+1]>57) {
+		if (p[i]<48 || p[i]>57) {
 			strcpy (p, "NONE");
 			return;
 		}
